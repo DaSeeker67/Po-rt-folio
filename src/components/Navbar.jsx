@@ -85,7 +85,7 @@ const Navbar = () => {
             <motion.a
               whileHover={{ scale: 1.2, rotate: 10 }}
               whileTap={{ scale: 0.9 }}
-              href="https://github.com/yourusername"
+              href="https://github.com/DaSeeker67"
               target="_blank"
               rel="noopener noreferrer"
               className="text-purple-500 hover:text-white transition-colors duration-300"
@@ -95,7 +95,7 @@ const Navbar = () => {
             <motion.a
               whileHover={{ scale: 1.2, rotate: -10 }}
               whileTap={{ scale: 0.9 }}
-              href="https://linkedin.com/in/yourusername"
+              href="https://www.linkedin.com/in/amitmishrar2d2/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-purple-500 hover:text-white transition-colors duration-300"
