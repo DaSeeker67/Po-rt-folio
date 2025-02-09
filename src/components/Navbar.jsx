@@ -12,15 +12,15 @@ const Navbar = () => {
     { title: "Projects", icon: <BiCode className="text-xl" /> },
     { title: "Open Source", icon: <FaGithub className="text-xl" /> },
     { title: "CP Profiles", icon: <BiTrophy className="text-xl" /> },
-    { title: "Contact", icon: <BiEnvelope className="text-xl" /> },
+    
   ];
-
+ 
   const menuVariants = {
     open: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
+        duration: 0.5,
         type: "spring",
         stiffness: 100,
       },
@@ -41,7 +41,8 @@ const Navbar = () => {
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 , }}
+            transition={{duration: 0.5}}
             className="text-white text-2xl font-bold flex items-center gap-2"
           >
             
@@ -87,7 +88,7 @@ const Navbar = () => {
               href="https://github.com/yourusername"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-300 hover:text-white transition-colors duration-300"
+              className="text-purple-500 hover:text-white transition-colors duration-300"
             >
               <FaGithub className="text-2xl" />
             </motion.a>
@@ -97,7 +98,7 @@ const Navbar = () => {
               href="https://linkedin.com/in/yourusername"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-300 hover:text-white transition-colors duration-300"
+              className="text-purple-500 hover:text-white transition-colors duration-300"
             >
               <FaLinkedin className="text-2xl" />
             </motion.a>
