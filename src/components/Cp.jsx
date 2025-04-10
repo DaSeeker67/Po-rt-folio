@@ -158,7 +158,7 @@ function Cp() {
             <div className="flex items-center justify-between mb-4">
               <FaTrophy className="text-3xl text-yellow-400" />
               <span className="text-2xl font-bold text-white">
-                {platformData.leetcode.data?.contestRating || 1645}
+                {Math.round(platformData.leetcode.data?.contestRating) || 1645}
               </span>
             </div>
             <p className="text-purple-200">Highest LeetCode Rating</p>
