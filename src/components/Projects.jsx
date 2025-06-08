@@ -41,7 +41,7 @@ function Projects() {
     backend: "https://github.com/DaSeeker67/TheZenChat_backend"
   },
   tags: ["Full Stack", "WebSocket", "Privacy", "Real-time App"]
-}
+},
     {
       title: "Vakmitra - Offline Speech Translator",
       description: "An offline speech translator using Vosk and Marian NMT for low-connectivity areas.",
