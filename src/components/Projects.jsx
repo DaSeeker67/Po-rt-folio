@@ -6,24 +6,42 @@ import { BiMoviePlay } from 'react-icons/bi';
 
 function Projects() {
   const projects = [
-    {
-      title: "Movie Recommendation System",
-      description: "ML-powered movie recommendation engine using TMDb dataset with over 5000 movies.",
-      tech: "Python, scikit-learn, Streamlit, TMDb API",
-      year: "2024",
-      icon: <BiMoviePlay className="text-2xl text-red-500" />,
-      details: [
-        "Implemented content-based recommendation using cosine similarity",
-        "Processed and vectorized movie data using sklearn",
-        "Built interactive web interface with Streamlit",
-        "Handles dataset of 5000+ English movies"
-      ],
-      links: {
-        github: "https://github.com/DaSeeker67/movie-recommendation",
-        demo: "https://movie-recommendation.streamlit.app"
-      },
-      tags: ["Machine Learning", "Web App", "Data Science"]
-    },
+     {
+  title: "CodiStar – Online Code Editor",
+  description: "Collaborative online code editor supporting syntax highlighting and real-time coding.",
+  tech: "React, Monaco Editor, TypeScript, TailwindCSS, Vite",
+  year: "2025",
+  icon: <BiCodeAlt className="text-2xl text-blue-500" />,
+  details: [
+    "Built a fast and responsive code editor using Monaco Editor",
+    "Supports multi-language syntax highlighting and real-time editing",
+    "Developed with performance-focused stack (Vite + TailwindCSS)",
+    "Deployed on Vercel with minimal latency"
+  ],
+  links: {
+    github: "https://github.com/DaSeeker67/codi_star",
+    demo: "https://codi-star-kl2r0cpr3-daseeker67s-projects.vercel.app/"
+  },
+  tags: ["Frontend", "Developer Tools", "React", "Web App"]
+},
+{
+  title: "Zen Chat – Ephemeral Room-Based Chat App",
+  description: "Privacy-focused real-time chat app where chats are cleared once all users leave the room.",
+  tech: "React, WebSockets, TypeScript, Express.js, Node.js",
+  year: "2025",
+  icon: <BiMessageRoundedDots className="text-2xl text-green-500" />,
+  details: [
+    "Built real-time chat using native WebSocket protocol",
+    "Implements room-based ephemeral messaging — no storage or history",
+    "Frontend in React (TypeScript), backend with Node.js + Express",
+    "Focuses on privacy, zero-trace communication model"
+  ],
+  links: {
+    github: "https://github.com/DaSeeker67/TheZenChat_frontend",
+    backend: "https://github.com/DaSeeker67/TheZenChat_backend"
+  },
+  tags: ["Full Stack", "WebSocket", "Privacy", "Real-time App"]
+}
     {
       title: "Vakmitra - Offline Speech Translator",
       description: "An offline speech translator using Vosk and Marian NMT for low-connectivity areas.",
@@ -57,6 +75,24 @@ function Projects() {
         demo: "https://saa-su-ji-buyers-frontend.vercel.app/"
       },
       tags: ["Full Stack", "E-commerce", "Machine Learning"]
+    },
+     {
+      title: "Movie Recommendation System",
+      description: "ML-powered movie recommendation engine using TMDb dataset with over 5000 movies.",
+      tech: "Python, scikit-learn, Streamlit, TMDb API",
+      year: "2024",
+      icon: <BiMoviePlay className="text-2xl text-red-500" />,
+      details: [
+        "Implemented content-based recommendation using cosine similarity",
+        "Processed and vectorized movie data using sklearn",
+        "Built interactive web interface with Streamlit",
+        "Handles dataset of 5000+ English movies"
+      ],
+      links: {
+        github: "https://github.com/DaSeeker67/movie-recommendation",
+        demo: "https://movie-recommendation-ndacipzqvwmk9djthnyawl.streamlit.app/"
+      },
+      tags: ["Machine Learning", "Web App", "Data Science"]
     },
     {
       title: "Dijkstra Algorithm Visualizer",
