@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaRaspberryPi, FaReact, FaDatabase, FaCode, FaGithub, FaPlay } from 'react-icons/fa';
 import { SiJavascript, SiPython, SiD3Dotjs, SiStreamlit, SiScikitlearn } from 'react-icons/si';
-import { BiMoviePlay } from 'react-icons/bi';
+import { BiMoviePlay,  BiMessageRoundedDots, BiCodeAlt  } from 'react-icons/bi';
 
 function Projects() {
   const projects = [
