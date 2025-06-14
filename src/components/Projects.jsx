@@ -37,8 +37,8 @@ function Projects() {
     "Focuses on privacy, zero-trace communication model"
   ],
   links: {
-    github: "https://github.com/DaSeeker67/TheZenChat_frontend",
-    backend: "https://github.com/DaSeeker67/TheZenChat_backend"
+    demo: "the-zen-chat-frontend-63xo.vercel.app/",
+    github: "https://github.com/DaSeeker67/TheZenChat_backend"
   },
   tags: ["Full Stack", "WebSocket", "Privacy", "Real-time App"]
 },
