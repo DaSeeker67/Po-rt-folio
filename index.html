@@ -5,6 +5,33 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>B@tman</title>
+    <!-- Unicorn Studio Script -->
+    <script type="text/javascript">
+      console.log('Loading Unicorn Studio script...');
+      !function(){
+        if(!window.UnicornStudio){
+          window.UnicornStudio={isInitialized:!1};
+          var i=document.createElement("script");
+          i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js";
+          i.onload=function(){
+            console.log('Unicorn Studio script loaded successfully');
+            if(!window.UnicornStudio.isInitialized){
+              try {
+                UnicornStudio.init();
+                window.UnicornStudio.isInitialized=!0;
+                console.log('Unicorn Studio initialized successfully');
+              } catch(e) {
+                console.error('Error initializing Unicorn Studio:', e);
+              }
+            }
+          };
+          i.onerror=function(){
+            console.error('Failed to load Unicorn Studio script');
+          };
+          (document.head || document.body).appendChild(i);
+        }
+      }();
+    </script>
   </head>
   <body>
     <div id="root"></div>
