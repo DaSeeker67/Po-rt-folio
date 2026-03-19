@@ -1,70 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { SiLeetcode, SiCodechef, SiCodeforces } from 'react-icons/si';
+import { SiLeetcode, SiCodechef } from 'react-icons/si';
 import { FaTrophy, FaMedal, FaChartLine } from 'react-icons/fa';
 import axios from 'axios';
 
 const api_base_url = "https://backend-prt.vercel.app";
+
+const StatCard = ({ icon, value, label, delay }) => (
+    <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ delay }}
+        className="glass-morphism p-6 flex flex-col items-center text-center group hover:border-accent-color/50 transition-all"
+    >
+        <div className="text-3xl text-accent-color mb-4 group-hover:scale-110 transition-transform">
+            {icon}
+        </div>
+        <div className="text-3xl font-black text-white mb-1 tracking-tighter">
+            {value}
+        </div>
+        <div className="text-[10px] font-black uppercase tracking-widest opacity-40">
+            {label}
+        </div>
+    </motion.div>
+);
 
 function Cp() {
   const [platformData, setPlatformData] = useState({
     leetcode: { loading: true, data: null, error: null },
     codechef: { loading: true, data: null, error: null }
   });
-  const [totalSolved, setTotalSolved] = useState("500+"); // Default value until API data is loaded
+  const [totalSolved, setTotalSolved] = useState("500+");
 
-  // LeetCode username
   const leetcodeUsername = "amitmishra4447";
-  // CodeChef username
   const codechefUsername = "batman76";
 
   useEffect(() => {
-    // Fetch LeetCode data
     const fetchLeetCodeData = async () => {
       try {
         const response = await axios.get(`${api_base_url}/leetcode/${leetcodeUsername}`);
         setPlatformData(prev => ({
           ...prev,
-          leetcode: {
-            loading: false,
-            data: response.data,
-            error: null
-          }
+          leetcode: { loading: false, data: response.data, error: null }
         }));
       } catch (error) {
-        console.error("Error fetching LeetCode data:", error);
         setPlatformData(prev => ({
           ...prev,
-          leetcode: {
-            loading: false,
-            data: null,
-            error: "Failed to load LeetCode data"
-          }
+          leetcode: { loading: false, data: null, error: true }
         }));
       }
     };
 
-    // Fetch CodeChef data
     const fetchCodeChefData = async () => {
       try {
         const response = await axios.get(`${api_base_url}/codechef/${codechefUsername}`);
         setPlatformData(prev => ({
           ...prev,
-          codechef: {
-            loading: false,
-            data: response.data,
-            error: null
-          }
+          codechef: { loading: false, data: response.data, error: null }
         }));
       } catch (error) {
-        console.error("Error fetching CodeChef data:", error);
         setPlatformData(prev => ({
           ...prev,
-          codechef: {
-            loading: false,
-            data: null,
-            error: "Failed to load CodeChef data"
-          }
+          codechef: { loading: false, data: null, error: true }
         }));
       }
     };
@@ -76,198 +73,108 @@ function Cp() {
   useEffect(() => {
     if (!platformData.leetcode.loading && platformData.leetcode.data) {
       const leetcodeSolved = platformData.leetcode.data.totalSolved || 400;
-      const codechefSolved = 100; 
-      
-      setTotalSolved(`${leetcodeSolved + codechefSolved}+`);
+      setTotalSolved(`${leetcodeSolved + 100}+`);
     }
   }, [platformData.leetcode.data]);
 
-  const getPlatforms = () => {
-    return [
-      {
-        name: "LeetCode",
-        icon: <SiLeetcode className="text-4xl text-yellow-500" />,
-        rating: Math.round(platformData.leetcode.data?.contestRating )|| 1645,
-        solved: platformData.leetcode.data?.totalSolved ? `${platformData.leetcode.data.totalSolved}+` : "400+",
-        loading: platformData.leetcode.loading,
-        error: platformData.leetcode.error,
-        achievements: [
-          `Solved ${platformData.leetcode.data?.totalSolved || "500+"} DSA problems`,
-          "Strong problem-solving skills in algorithms",
-          "Regular participant in weekly contests"
-        ],
-        color: "yellow",
-        link: "https://leetcode.com/amitmishra4447"
-      },
-      {
-        name: "CodeChef",
-        icon: <SiCodechef className="text-4xl text-brown-500" />,
-        rating: platformData.codechef.data?.rating || 1613,
-        maxRating: platformData.codechef.data?.maxRating || 1613,
-        solved: "100+",
-        loading: platformData.codechef.loading,
-        error: platformData.codechef.error,
-        achievements: [
-          `Max rating: ${platformData.codechef.data?.maxRating || 1613}`,
-          "Solved 100+ problems",
-          "Ranked 19 in Starters 153"
-        ],
-        color: "brown",
-        link: "https://www.codechef.com/users/batman76"
-      },
-    ];
-  };
-
-  const platforms = getPlatforms();
+  const platforms = [
+    {
+      name: "LeetCode",
+      icon: <SiLeetcode />,
+      rating: Math.round(platformData.leetcode.data?.contestRating) || 1645,
+      solved: platformData.leetcode.data?.totalSolved ? `${platformData.leetcode.data.totalSolved}` : "1746",
+      link: "https://leetcode.com/u/amitmishra4447/",
+      color: "#f59e0b"
+    },
+    {
+      name: "CodeChef",
+      icon: <SiCodechef />,
+      rating: platformData.codechef.data?.rating || 1613,
+      solved: "100+",
+      link: "https://www.codechef.com/users/batman76",
+      color: "#8b4513"
+    }
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900 py-16 px-4">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="max-w-6xl mx-auto"
-      >
-        {/* Header */}
-        <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Competitive Programming
-          </h2>
-          <p className="text-xl text-purple-200">
-            Solving complex problems across multiple platforms
-          </p>
-        </motion.div>
+    <section id="cp" className="py-40 px-10 md:px-20 bg-[#0d1117]">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-10">
+            <div>
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="text-secondary-accent text-xs font-black uppercase tracking-[0.5em] mb-4"
+                >
+                    Problem Solving Matrix
+                </motion.div>
+                <motion.h2 
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    className="text-7xl font-black uppercase tracking-tighter leading-none"
+                >
+                    DSA & <span className="accent-gradient">ALGORITHMS</span>
+                </motion.h2>
+            </div>
+            <p className="max-w-xs text-xs opacity-50 uppercase font-bold tracking-widest leading-loose text-right">
+                Sacrificing 1700+ problems to the LeetCode gods. 3-star witch on CodeChef. Shipping logic with Big O efficiency.
+            </p>
+        </div>
 
-        {/* Stats Overview */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
-        >
-          <div className="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-purple-500/30">
-            <div className="flex items-center justify-between mb-4">
-              <FaChartLine className="text-3xl text-purple-400" />
-              <span className="text-2xl font-bold text-white">{totalSolved}</span>
-            </div>
-            <p className="text-purple-200">Total Problems Solved</p>
-          </div>
-          <div className="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-purple-500/30">
-            <div className="flex items-center justify-between mb-4">
-              <FaTrophy className="text-3xl text-yellow-400" />
-              <span className="text-2xl font-bold text-white">
-                {Math.round(platformData.leetcode.data?.contestRating) || 1645}
-              </span>
-            </div>
-            <p className="text-purple-200">Highest LeetCode Rating</p>
-          </div>
-          <div className="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-purple-500/30">
-            <div className="flex items-center justify-between mb-4">
-              <FaMedal className="text-3xl text-orange-400" />
-              <span className="text-2xl font-bold text-white">Top 13%</span>
-            </div>
-            <p className="text-purple-200">Leetcode Ranking</p>
-          </div>
-        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            <StatCard icon={<FaChartLine />} value={totalSolved} label="Mission Successful" delay={0.1} />
+            <StatCard icon={<FaTrophy />} value={platforms[0].rating} label="Max LeetCode Rating" delay={0.2} />
+            <StatCard icon={<FaMedal />} value="Top 13%" label="Global Standings" delay={0.3} />
+        </div>
 
-        {/* Platform Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {platforms.map((platform, index) => (
             <motion.div
-              key={index}
+              key={platform.name}
               initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              whileInView={{ y: 0, opacity: 1 }}
               transition={{ delay: index * 0.2 }}
-              className="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-purple-500/30 hover:border-purple-500 transition-all duration-300"
+              className="glass-morphism p-10 flex flex-col justify-between group relative overflow-hidden"
             >
-              <div className="flex items-center justify-between mb-6">
+              <div className="absolute top-0 right-0 p-10 text-8xl opacity-5 group-hover:opacity-10 transition-opacity">
                 {platform.icon}
-                <h3 className="text-2xl font-bold text-white">{platform.name}</h3>
               </div>
-
-              {platform.loading ? (
-                <div className="flex justify-center items-center py-4">
-                  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-500"></div>
+              
+              <div>
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="text-4xl" style={{ color: platform.color }}>
+                        {platform.icon}
+                    </div>
+                    <h3 className="text-3xl font-black uppercase tracking-tighter">{platform.name}</h3>
                 </div>
-              ) : platform.error ? (
-                <div className="text-red-400 text-center py-2">
-                  Could not load data
+
+                <div className="flex gap-10 mb-10">
+                    <div>
+                        <div className="text-sm font-black uppercase tracking-widest opacity-30">Rating</div>
+                        <div className="text-3xl font-black tracking-tighter">{platform.loading ? "..." : platform.rating}</div>
+                    </div>
+                    <div>
+                        <div className="text-sm font-black uppercase tracking-widest opacity-30">Solved</div>
+                        <div className="text-3xl font-black tracking-tighter">{platform.loading ? "..." : platform.solved}</div>
+                    </div>
                 </div>
-              ) : (
-                <>
-                  {platform.rating && (
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-purple-200">Rating</span>
-                        <span className="text-xl font-bold text-white">
-                          {platform.rating}
-                        </span>
-                      </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
-                        <div
-                          className={`bg-${platform.color}-500 h-2 rounded-full`}
-                          style={{ width: `${(platform.rating / 3000) * 100}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  )}
-
-                  {platform.maxRating && platform.name === "CodeChef" && (
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-purple-200">Max Rating</span>
-                        <span className="text-xl font-bold text-white">
-                          {platform.maxRating}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {platform.solved && (
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-purple-200">Problems Solved</span>
-                        <span className="text-xl font-bold text-white">
-                          {platform.solved}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              <div className="space-y-2">
-                {platform.achievements.map((achievement, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: (index * 0.2) + (idx * 0.1) }}
-                    className="flex items-start space-x-2"
-                  >
-                    <span className="text-purple-400">•</span>
-                    <p className="text-purple-200 text-sm">{achievement}</p>
-                  </motion.div>
-                ))}
               </div>
 
               <motion.a
                 href={platform.link}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-block w-full text-center py-2 px-4 rounded-lg bg-purple-600/30 hover:bg-purple-600/50 text-purple-200 transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                rel="noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-4 glass-morphism border border-white/10 text-center font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all"
               >
-                View Profile
+                ACCESS PROTOCOL
               </motion.a>
             </motion.div>
           ))}
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </section>
   );
 }
 
